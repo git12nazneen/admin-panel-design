@@ -1,30 +1,23 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Button } from '@/components/ui/button'
-import { 
-  Sheet, 
-  SheetContent, 
-  SheetHeader, 
-  SheetTitle, 
-  SheetTrigger 
-} from '@/components/ui/sheet'
 import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger
+} from '@/components/ui/sheet'
+import Accordions from '@/component/Accordions.vue'
+import Selection from '@/component/Selection.vue'
 import { Menu, X, Home, Users, Folder, Calendar, BarChart } from 'lucide-vue-next'
 
 const isSidebarOpen = ref(false)
 const menuItems = [
-    { name: 'Dashboard', icon: Home, href: '/' },
-    { name: 'Team', icon: Users, href: '/team' },
-    { name: 'Projects', icon: Folder, href: '/projects' },
-  ]
+  { name: 'Dashboard', icon: Home, href: '/' },
+  { name: 'Team', icon: Users, href: '/team' },
+  { name: 'Projects', icon: Folder, href: '/projects' },
+]
 const toggleSidebar = () => {
   isSidebarOpen.value = !isSidebarOpen.value
 }
@@ -57,48 +50,30 @@ const toggleSidebar = () => {
       <aside class="hidden md:flex w-64 flex-col bg-background border-r">
        
         <nav class="flex-1 space-y-1 p-4">
-          <Select>
-                <SelectTrigger class="w-[180px] border p-2 bg-gray-100">
-                    <SelectValue placeholder="Select a fruit" />
-                </SelectTrigger>
-                <SelectContent class="absolute bg-white shadow-lg rounded-md z-50">
-                    <SelectGroup>
-                        <SelectLabel>Fruits</SelectLabel>
-                        <SelectItem value="apple">Apple</SelectItem>
-                        <SelectItem value="banana">Banana</SelectItem>
-                        <SelectItem value="blueberry">Blueberry</SelectItem>
-                        <SelectItem value="grapes">Grapes</SelectItem>
-                        <SelectItem value="pineapple">Pineapple</SelectItem>
-                    </SelectGroup>
-                </SelectContent>
-            </Select>
-          <a 
-            v-for="item in menuItems" 
-            :key="item.name" 
-            :href="item.href"
-            class="flex items-center p-2 text-sm font-medium rounded-md hover:bg-accent hover:text-accent-foreground"
-          >
+          <Selection></Selection>
+          <h1>PlatForm</h1>
+          <Accordions></Accordions>
+          <h1>Projects</h1>
+          <a v-for="item in menuItems" :key="item.name" :href="item.href"
+            class="flex items-center p-2 text-sm font-medium rounded-md hover:bg-accent hover:text-accent-foreground">
             <component :is="item.icon" class="h-5 w-5 mr-3" />
             {{ item.name }}
           </a>
+
         </nav>
       </aside>
 
       <!-- Mobile sidebar -->
       <Sheet v-model:open="isSidebarOpen">
-   
+
         <SheetContent side="left" class="w-64 p-0">
           <SheetHeader class="p-4 border-b">
             <SheetTitle>Menu</SheetTitle>
           </SheetHeader>
           <nav class="flex-1 space-y-1 p-4">
-            <a 
-              v-for="item in menuItems" 
-              :key="item.name" 
-              :href="item.href"
+            <a v-for="item in menuItems" :key="item.name" :href="item.href"
               class="flex items-center p-2 text-sm font-medium rounded-md hover:bg-accent hover:text-accent-foreground"
-              @click="isSidebarOpen = false"
-            >
+              @click="isSidebarOpen = false">
               <component :is="item.icon" class="h-5 w-5 mr-3" />
               {{ item.name }}
             </a>

@@ -8,15 +8,7 @@ import {
     SheetTitle,
     SheetTrigger
 } from '@/components/ui/sheet'
-import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
-} from '@/components/ui/select'
+
 import { Menu, X, Home, Users, Folder, Calendar, BarChart } from 'lucide-vue-next'
 
 const isOpen = ref(false)
@@ -65,22 +57,8 @@ const menuItems = [
 
 
         <nav class="flex flex-col space-y-2 p-4">
-           
-            <Select>
-                <SelectTrigger class="w-[180px] border p-2 bg-gray-100">
-                    <SelectValue placeholder="Select a fruit" />
-                </SelectTrigger>
-                <SelectContent class="absolute bg-white shadow-lg rounded-md z-50">
-                    <SelectGroup>
-                        <SelectLabel>Fruits</SelectLabel>
-                        <SelectItem value="apple">Apple</SelectItem>
-                        <SelectItem value="banana">Banana</SelectItem>
-                        <SelectItem value="blueberry">Blueberry</SelectItem>
-                        <SelectItem value="grapes">Grapes</SelectItem>
-                        <SelectItem value="pineapple">Pineapple</SelectItem>
-                    </SelectGroup>
-                </SelectContent>
-            </Select>
+
+
             <a v-for="item in menuItems" :key="item.name" :href="item.href"
                 class="flex items-center px-2 py-1 rounded-md hover:bg-accent hover:text-accent-foreground transition-colors">
                 <component :is="item.icon" class="mr-2 h-4 w-4" />
