@@ -8,6 +8,15 @@ import {
   SheetTitle, 
   SheetTrigger 
 } from '@/components/ui/sheet'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { Menu, X, Home, Users, Folder, Calendar, BarChart } from 'lucide-vue-next'
 
 const isSidebarOpen = ref(false)
@@ -15,8 +24,6 @@ const menuItems = [
     { name: 'Dashboard', icon: Home, href: '/' },
     { name: 'Team', icon: Users, href: '/team' },
     { name: 'Projects', icon: Folder, href: '/projects' },
-    { name: 'Calendar', icon: Calendar, href: '/calendar' },
-    { name: 'Reports', icon: BarChart, href: '/reports' },
   ]
 const toggleSidebar = () => {
   isSidebarOpen.value = !isSidebarOpen.value
@@ -48,7 +55,23 @@ const toggleSidebar = () => {
     <div class="flex-1 flex">
       <!-- Sidebar for larger screens -->
       <aside class="hidden md:flex w-64 flex-col bg-background border-r">
+       
         <nav class="flex-1 space-y-1 p-4">
+          <Select>
+                <SelectTrigger class="w-[180px] border p-2 bg-gray-100">
+                    <SelectValue placeholder="Select a fruit" />
+                </SelectTrigger>
+                <SelectContent class="absolute bg-white shadow-lg rounded-md z-50">
+                    <SelectGroup>
+                        <SelectLabel>Fruits</SelectLabel>
+                        <SelectItem value="apple">Apple</SelectItem>
+                        <SelectItem value="banana">Banana</SelectItem>
+                        <SelectItem value="blueberry">Blueberry</SelectItem>
+                        <SelectItem value="grapes">Grapes</SelectItem>
+                        <SelectItem value="pineapple">Pineapple</SelectItem>
+                    </SelectGroup>
+                </SelectContent>
+            </Select>
           <a 
             v-for="item in menuItems" 
             :key="item.name" 

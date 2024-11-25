@@ -5,7 +5,11 @@ module.exports = {
   darkMode: ["class"],
   safelist: ["dark"],
   prefix: "",
-  
+  content: [
+    "./index.html",
+    "./src/**/*.{vue,js,ts,jsx,tsx}",
+    "./node_modules/@shadcn/vue/**/*.{vue,js,ts}"
+  ],
   theme: {
     container: {
       center: true,
