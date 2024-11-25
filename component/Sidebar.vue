@@ -99,7 +99,3 @@
   ]
   </script>
   
-  <style scoped>
-  /* Optional: Customize the sidebar transition */
-  </style>
-  

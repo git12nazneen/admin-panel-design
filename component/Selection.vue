@@ -8,12 +8,14 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select'
+
 </script>
 
 <template>
     <Select>
         <SelectTrigger style="width: 225px;" class="!w-[225px] border  bg-white z-50">
-            <SelectValue placeholder="Acme Inc Enterprise" />
+          
+            <SelectValue class="text-[12px]" placeholder="   Acme Inc Enterprise" />
         </SelectTrigger>
 
         <SelectContent class="absolute bg-white shadow-lg rounded-md z-50"> 
