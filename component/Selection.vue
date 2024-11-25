@@ -8,14 +8,15 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select'
+import { Pyramid } from 'lucide-vue-next';
 
 </script>
 
 <template>
     <Select>
         <SelectTrigger style="width: 225px;" class="!w-[225px] border  bg-white z-50">
-          
-            <SelectValue class="text-[12px]" placeholder="   Acme Inc Enterprise" />
+            <Pyramid />
+          <SelectValue class="text-[12px]" placeholder=" Acme Inc Enterprise" />
         </SelectTrigger>
 
         <SelectContent class="absolute bg-white shadow-lg rounded-md z-50"> 

@@ -4,19 +4,19 @@ import { Button } from '@/components/ui/button'
 import Accordions from '@/component/Accordions.vue'
 import Selection from '@/component/Selection.vue'
 import BredCrump from '@/component/BredCrump.vue'
-import { Menu, Home, Users, Folder, PanelLeft } from 'lucide-vue-next'
 
 const isSidebarCollapsed = ref(false)
+
+const toggleSidebarCollapse = () => {
+  isSidebarCollapsed.value = !isSidebarCollapsed.value
+}
+import { Menu, Home, Users, Folder, PanelLeft } from 'lucide-vue-next'
 
 const menuItems = [
   { name: 'Dashboard', icon: Home, href: '/' },
   { name: 'Team', icon: Users, href: '/team' },
   { name: 'Projects', icon: Folder, href: '/projects' },
 ]
-
-const toggleSidebarCollapse = () => {
-  isSidebarCollapsed.value = !isSidebarCollapsed.value
-}
 </script>
 
 <template>
@@ -28,49 +28,39 @@ const toggleSidebarCollapse = () => {
     ]">
       <div class="flex items-center justify-between p-4 border-b">
         <!-- Selection -->
-        <Selection 
-          :class="[
-            'transition-all duration-300',
-            isSidebarCollapsed ? 'scale-90 opacity-0 hidden' : 'scale-100 opacity-100'
-          ]" 
-        />
+        <Selection :class="[ 
+          'transition-all duration-300',
+          isSidebarCollapsed ? 'scale-90 opacity-0 hidden' : 'scale-100 opacity-100'
+        ]" />
       </div>
-      
+
       <!-- Navigation -->
       <nav class="flex-1 space-y-1 p-4">
-        <h1 
-          :class="[
-            'transition-all duration-300',
-            isSidebarCollapsed ? 'opacity-0 hidden' : 'opacity-100'
-          ]">
+        <h1 :class="[ 
+          'transition-all duration-300',
+          isSidebarCollapsed ? 'opacity-0 hidden' : 'opacity-100'
+        ]">
           Platform
         </h1>
-        <Accordions 
-          :class="[
-            'transition-all duration-300',
-            isSidebarCollapsed ? 'opacity-0 hidden' : 'opacity-100'
-          ]"
-        />
-        <h1 
-          :class="[
-            'transition-all duration-300',
-            isSidebarCollapsed ? 'opacity-0 hidden' : 'opacity-100'
-          ]">
+        <!-- Accordion with width adjustment on collapse -->
+        <Accordions :class="[ 
+         
+        ]" />
+        <h1 :class="[ 
+          'transition-all duration-300',
+          isSidebarCollapsed ? 'opacity-0 hidden' : 'opacity-100'
+        ]">
           Projects
         </h1>
-        
+
         <!-- Menu Items -->
-        <a 
-          v-for="item in menuItems" 
-          :key="item.name" 
-          :href="item.href" 
+        <a v-for="item in menuItems" :key="item.name" :href="item.href"
           class="flex items-center p-2 text-sm font-medium rounded-md hover:bg-accent hover:text-accent-foreground">
           <component :is="item.icon" class="h-5 w-5" />
-          <span 
-            :class="[
-              'ml-3 transition-all duration-300',
-              isSidebarCollapsed ? 'opacity-0 hidden' : 'opacity-100'
-            ]">
+          <span :class="[ 
+            'ml-3 transition-all duration-300',
+            isSidebarCollapsed ? 'opacity-0 hidden' : 'opacity-100'
+          ]">
             {{ item.name }}
           </span>
         </a>
