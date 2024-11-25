@@ -12,17 +12,16 @@ import {
 
 <template>
     <Select>
-        <SelectTrigger class="w-full border p-2 bg-gray-100">
-            <SelectValue placeholder="Select a fruit" />
+        <SelectTrigger style="width: 225px;" class="!w-[225px] border  bg-white z-50">
+            <SelectValue placeholder="Acme Inc Enterprise" />
         </SelectTrigger>
-        <SelectContent class="absolute bg-white shadow-lg rounded-md z-50">
+
+        <SelectContent class="absolute bg-white shadow-lg rounded-md z-50"> 
             <SelectGroup>
-                <SelectLabel>Fruits</SelectLabel>
-                <SelectItem value="apple">Apple</SelectItem>
-                <SelectItem value="banana">Banana</SelectItem>
-                <SelectItem value="blueberry">Blueberry</SelectItem>
-                <SelectItem value="grapes">Grapes</SelectItem>
-                <SelectItem value="pineapple">Pineapple</SelectItem>
+                <SelectLabel>Teams</SelectLabel>
+                <SelectItem value="acmeInc">Acme inc</SelectItem>
+                <SelectItem value="acmeCorp">Acme Corp</SelectItem>
+                <SelectItem value="acmeIndustry">Acme Industry</SelectItem>
             </SelectGroup>
         </SelectContent>
     </Select>
