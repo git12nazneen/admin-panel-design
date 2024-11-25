@@ -10,3 +10,5 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue'
   
   </DefaultLayout>
 </template>
+
+

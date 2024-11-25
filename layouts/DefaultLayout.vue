@@ -1,97 +1,85 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Button } from '@/components/ui/button'
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger
-} from '@/components/ui/sheet'
 import Accordions from '@/component/Accordions.vue'
 import Selection from '@/component/Selection.vue'
 import BredCrump from '@/component/BredCrump.vue'
-import { Menu, X, Home, Users, Folder, Calendar, BarChart, PanelLeft } from 'lucide-vue-next'
+import { Menu, Home, Users, Folder, PanelLeft } from 'lucide-vue-next'
 
-const isSidebarOpen = ref(false)
+const isSidebarCollapsed = ref(false)
+
 const menuItems = [
   { name: 'Dashboard', icon: Home, href: '/' },
   { name: 'Team', icon: Users, href: '/team' },
   { name: 'Projects', icon: Folder, href: '/projects' },
 ]
-const toggleSidebar = () => {
-  isSidebarOpen.value = !isSidebarOpen.value
+
+const toggleSidebarCollapse = () => {
+  isSidebarCollapsed.value = !isSidebarCollapsed.value
 }
-
-
 </script>
 
 <template>
-  <div class="min-h-screen bg-background flex flex-col">
-    <!-- Header -->
-    <header class="sticky top-0 z-40 w-full  ">
-      <div class="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0 gap-5">
-        <div class="flex gap-6 md:gap-10 z-50">
-          <Button variant="ghost" size="icon" class="md:hidden" @click="toggleSidebar">
-            <Menu class="h-6 w-6" />
+  <div class="flex min-h-screen bg-background">
+    <!-- Sidebar -->
+    <aside :class="[
+      'flex flex-col h-screen bg-[#fafafa] border-r transition-all duration-300',
+      isSidebarCollapsed ? 'w-16' : 'w-64'
+    ]">
+      <div class="flex items-center justify-between p-4 border-b">
+        <h1 :class="[isSidebarCollapsed ? 'hidden' : 'text-lg font-bold']">
+          <Selection :class="[isSidebarCollapsed ? 'w-[10%] scale-90' : 'w-full scale-100']"
+            class="transition-all duration-300" />
+        </h1>
+
+      </div>
+      <nav class="flex-1 space-y-1 p-4">
+
+        <h1 :class="isSidebarCollapsed ? 'text-sm' : 'text-lg'">Platform</h1>
+        <Accordions />
+        <h1 :class="isSidebarCollapsed ? 'text-sm' : 'text-lg'">Projects</h1>
+        <a v-for="item in menuItems" :key="item.name" :href="item.href"
+          class="flex items-center p-2 text-sm font-medium rounded-md hover:bg-accent hover:text-accent-foreground">
+          <component :is="item.icon" class="h-5 w-5 mr-3" />
+          <span v-show="!isSidebarCollapsed">{{ item.name }}</span>
+        </a>
+      </nav>
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto">
+      <header class="sticky top-0 z-40 w-full bg-white">
+        <div class="container flex h-[71px] items-center space-x-4">
+          <Button variant="ghost" size="icon" class="" @click="toggleSidebarCollapse">
+            <PanelLeft class="h-6 w-6" />
             <span class="sr-only">Toggle Sidebar</span>
           </Button>
-          <Selection></Selection>
-
+          <BredCrump />
         </div>
-        <div class="flex flex-1 items-center justify-start space-x-4 ">
-          <button  size="large">
-            <PanelLeft />
-          </button>
-          <BredCrump></BredCrump>
-        </div>
-      </div>
-    </header>
-
-    <div class="flex-1 flex">
-      <!-- Sidebar for larger screens -->
-      <aside class="hidden md:flex w-64 flex-col bg-[#fafafa] border-r">
-
-        <nav class="flex-1 space-y-1 p-4">
-
-          <h1>PlatForm</h1>
-          <Accordions></Accordions>
-          <h1>Projects</h1>
-          <a v-for="item in menuItems" :key="item.name" :href="item.href"
-            class="flex items-center p-2 text-sm font-medium rounded-md hover:bg-accent hover:text-accent-foreground">
-            <component :is="item.icon" class="h-5 w-5 mr-3" />
-            {{ item.name }}
-          </a>
-
-        </nav>
-      </aside>
-
-      <!-- Mobile sidebar -->
-      <Sheet v-model:open="isSidebarOpen">
-
-        <SheetContent side="left" class="w-64 p-0">
-          <SheetHeader class="p-4 border-b">
-            <SheetTitle>Menu</SheetTitle>
-          </SheetHeader>
-          <nav class="flex-1 space-y-1 p-4">
-            <Selection></Selection>
-            <h1>PlatForm</h1>
-            <Accordions></Accordions>
-            <h1>Projects</h1>
-            <a v-for="item in menuItems" :key="item.name" :href="item.href"
-              class="flex items-center p-2 text-sm font-medium rounded-md hover:bg-accent hover:text-accent-foreground"
-              @click="isSidebarOpen = false">
-              <component :is="item.icon" class="h-5 w-5 mr-3" />
-              {{ item.name }}
-            </a>
-          </nav>
-        </SheetContent>
-      </Sheet>
-
-      <!-- Main content -->
-      <main class="flex-1 overflow-y-auto p-6">
+      </header>
+      <div class="p-4">
         <slot />
-      </main>
-    </div>
+      </div>
+    </main>
   </div>
 </template>
+
+<style scoped>
+/* Optional styles for sticky header and any specific tweaks */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+aside {
+  transition: all 0.3s ease-in-out;
+}
+
+a {
+  transition: background-color 0.2s ease-in-out;
+}
+</style>
