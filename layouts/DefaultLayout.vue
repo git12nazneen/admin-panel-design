@@ -10,25 +10,26 @@ const isSidebarCollapsed = ref(false)
 const toggleSidebarCollapse = () => {
   isSidebarCollapsed.value = !isSidebarCollapsed.value
 }
-import { Menu, Home, Users, Folder, PanelLeft } from 'lucide-vue-next'
+import { Menu, Home, Users, Folder, PanelLeft, BookCopy, BadgeCheck, AppWindowMac } from 'lucide-vue-next'
 
 const menuItems = [
   { name: 'Dashboard', icon: Home, href: '/' },
   { name: 'Team', icon: Users, href: '/team' },
   { name: 'Projects', icon: Folder, href: '/projects' },
 ]
+
 </script>
 
 <template>
   <div class="flex min-h-screen bg-background">
     <!-- Sidebar -->
-    <aside :class="[ 
+    <aside :class="[
       'flex flex-col h-screen bg-[#fafafa] border-r transition-all duration-300 overflow-hidden',
-      isSidebarCollapsed ? 'w-16' : 'w-64'
+      isSidebarCollapsed ? 'w-0 ' : 'w-64 '
     ]">
       <div class="flex items-center justify-between p-4 border-b">
-        <!-- Selection -->
-        <Selection :class="[ 
+       
+        <Selection :class="[
           'transition-all duration-300',
           isSidebarCollapsed ? 'scale-90 opacity-0 hidden' : 'scale-100 opacity-100'
         ]" />
@@ -36,17 +37,17 @@ const menuItems = [
 
       <!-- Navigation -->
       <nav class="flex-1 space-y-1 p-4">
-        <h1 :class="[ 
+        <h1 :class="[
           'transition-all duration-300',
           isSidebarCollapsed ? 'opacity-0 hidden' : 'opacity-100'
         ]">
           Platform
         </h1>
         <!-- Accordion with width adjustment on collapse -->
-        <Accordions :class="[ 
-         
+        <Accordions :class="[
+
         ]" />
-        <h1 :class="[ 
+        <h1 :class="[
           'transition-all duration-300',
           isSidebarCollapsed ? 'opacity-0 hidden' : 'opacity-100'
         ]">
@@ -56,14 +57,16 @@ const menuItems = [
         <!-- Menu Items -->
         <a v-for="item in menuItems" :key="item.name" :href="item.href"
           class="flex items-center p-2 text-sm font-medium rounded-md hover:bg-accent hover:text-accent-foreground">
-          <component :is="item.icon" class="h-5 w-5" />
-          <span :class="[ 
+          <!-- Icon with consistent size -->
+          <component :is="item.icon" class="h-5 w-5 text-gray-600 flex-shrink-0" />
+          <span :class="[
             'ml-3 transition-all duration-300',
             isSidebarCollapsed ? 'opacity-0 hidden' : 'opacity-100'
           ]">
             {{ item.name }}
           </span>
         </a>
+
       </nav>
     </aside>
 
